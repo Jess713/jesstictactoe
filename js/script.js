@@ -148,33 +148,22 @@ function onDocumentMouseDown( event )
         intersects = ray.intersectObjects( scene.children );
 
         targetList[i][j][k].name = i +" "+j+" "+k;
-
-
-        // if there is one (or more) intersections
-        // It has something to do with your if condition. It's getting called 4 times here.
-        // I believe it has to do with this "INTERSECTED[0][0][k] != intersects[0].object"?
-        // But I'm not too sure what it's doing.
         if ( intersects.length > 0 && INTERSECTED != intersects[0].object)
         {
-
-
           INTERSECTED = intersects[0].object;
-
           // INTERSECTED.id= targetList[i][j][k].name;
           INTERSECTED.material.emissive.setHex( 0xff0000 );
           // let val = document.getElementById(INTERSECTED.name);
           console.log("The Intersected Node: " + INTERSECTED.name);
-
-
-
         }
-//Checks Horizontal win on the first plane.
-        if(targetList[0][j][k].material.emissive.equals({r:1,g:0,b:0})
-          &&targetList[0][j+1][k].material.emissive.equals({r:1,g:0,b:0})
-          &&targetList[0][j+2][k].material.emissive.equals({r:1,g:0,b:0})
-          &&targetList[0][j+3][k].material.emissive.equals({r:1,g:0,b:0})){
-          alert('red win');
-        }
+      }
+
+      //Checks Horizontal win on every plane.
+      if(  targetList[i][0][j].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][1][j].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][2][j].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][3][j].material.emissive.equals({r:1,g:0,b:0}) ){
+        alert('red win');
 
       }
     }
