@@ -156,16 +156,79 @@ function onDocumentMouseDown( event )
           // let val = document.getElementById(INTERSECTED.name);
           console.log("The Intersected Node: " + INTERSECTED.name);
         }
-      }
+      } //------k for loop ends
 
-      //Checks Horizontal win on every plane.
-      if(  targetList[i][0][j].material.emissive.equals({r:1,g:0,b:0})
+      //Checks 2D Horizontal win on every plane.
+      if(targetList[i][0][j].material.emissive.equals({r:1,g:0,b:0})
       && targetList[i][1][j].material.emissive.equals({r:1,g:0,b:0})
       && targetList[i][2][j].material.emissive.equals({r:1,g:0,b:0})
-      && targetList[i][3][j].material.emissive.equals({r:1,g:0,b:0}) ){
-        alert('red win');
-
+      && targetList[i][3][j].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red Horizontal win');
       }
+
+      //Checks 2D Vertical win on every plane.
+      if(targetList[i][j][0].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][j][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][j][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][j][3].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red Vertical win');
+      }
+
+      //Checks 2D First Diagonal win on every plane.
+      if(targetList[i][0][3].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][1][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][2][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][3][0].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red Diagonal1 win');
+      }
+
+      //Checks 2D Second Diagonal win on every plane.
+      if(targetList[i][3][3].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][2][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][1][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[i][0][0].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red Diagonal2 win');
+      }
+
+      //Win condition for 3D planes.
+      //Checks first 3D win on every plane. Checks up and down
+      if(targetList[0][i][j].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][i][j].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][i][j].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][i][j].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D win. Checks up and down');
+      }
+
+      //Checks first set 3D Diagonal win.
+      if(targetList[0][0][3].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][1][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][2][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][3][0].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D 1st Diagonal win.');
+      }
+      //Checks first set 3D Diagonal win.
+      if(targetList[0][0][0].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][1][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][2][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][3][3].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D 1st Diagonal win.');
+      }
+
+      //Checks Second set 3D Diagonal win.
+      if(targetList[0][3][3].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][2][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][1][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][0][0].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D 2nd Diagonal win.');
+      }
+      //Checks Second set 3D Diagonal win.
+      if(targetList[0][3][0].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][2][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][1][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][0][3].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D 2nd Diagonal win.');
+      }
+
     }
   }
 
