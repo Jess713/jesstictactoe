@@ -37,8 +37,8 @@ function addCubes() {
   //1
   for(let i = 0; i < 4; i++){
     for(let j = 0; j < 4; j++){
-      var mesh  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xadc9f4} ));
-      mesh.position.x = xDistance * i;
+      var mesh  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xc3e4e5} ));
+      mesh.position.y = xDistance * i;
       mesh.position.z = zDistance * j;
       // mesh.position.y += 15;
       scene.add(mesh);
@@ -46,26 +46,26 @@ function addCubes() {
     }
 
     for(let j = 0; j < 4; j++){
-      var mesh2  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xadc9f4} ));
-      mesh2.position.x = xDistance * i;
+      var mesh2  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xc3e4e5} ));
+      mesh2.position.y = xDistance * i;
       mesh2.position.z = zDistance * j;
-      mesh2.position.y = 15;
+      mesh2.position.x = 15;
       scene.add(mesh2);
       targetList[i][j].push(mesh2);
     }
     for(let j = 0; j < 4; j++){
-      var mesh3  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xadc9f4} ));
-      mesh3.position.x = xDistance * i;
+      var mesh3  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xc3e4e5} ));
+      mesh3.position.y = xDistance * i;
       mesh3.position.z = zDistance * j;
-      mesh3.position.y = 30;
+      mesh3.position.x = 30;
       scene.add(mesh3);
       targetList[i][j].push(mesh3);
     }
     for(let j = 0; j < 4; j++){
-      var mesh4  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xadc9f4} ));
-      mesh4.position.x = xDistance * i;
+      var mesh4  = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xc3e4e5} ));
+      mesh4.position.y = xDistance * i;
       mesh4.position.z = zDistance * j;
-      mesh4.position.y = 45;
+      mesh4.position.x = 45;
       scene.add(mesh4);
       targetList[i][j].push(mesh4);
     }
@@ -86,24 +86,32 @@ function init() {
   document.body.appendChild(renderer.domElement);
 
   // Create camera.
-  camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
   camera.position.z = 150;
+  camera.position.x = -50;
+  camera.position.y = 110;
 
 
   // Add controls
   controls = new THREE.TrackballControls( camera );
   controls.addEventListener( 'change', render );
-  controls.target.set(0,0,-50);
+  controls.target.set(50,0,-50);
 
   // Create scene.
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xffffff );
 
   // Create directional light and add to scene.
-  var pointLight = new THREE.PointLight(0xFFFFFF, 1, 100000);
-  pointLight.position.set(1, 1, 1).normalize();
-  scene.add(pointLight);
-  var directionalLight = new THREE.DirectionalLight(0xffffff);
+  var pointLight1 = new THREE.PointLight(0xffffff, 1, 100);
+  var pointLight2 = new THREE.PointLight(0xffffff, 0.5, 100);
+  pointLight1.position.set(1, 1, 1).normalize();
+  pointLight1.position.y = 110;
+  pointLight2.position.set(1, 1, 1).normalize();
+  pointLight2.position.y = 55;
+
+  scene.add(pointLight1);
+  scene.add(pointLight2);
+  var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
   directionalLight.position.set(1, 1, 1).normalize();
   scene.add(directionalLight);
 
