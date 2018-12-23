@@ -8,12 +8,12 @@ var targetList = [
   [[],[],[],[]],
   [[],[],[],[]]
 ];
-var intersects = [
-  [[],[],[],[]],
-  [[],[],[],[]],
-  [[],[],[],[]],
-  [[],[],[],[]]
-];
+// var intersects = [
+//   [[],[],[],[]],
+//   [[],[],[],[]],
+//   [[],[],[],[]],
+//   [[],[],[],[]]
+// ];
 
 console.log(targetList);
 
@@ -27,7 +27,7 @@ animate();
 addCubes();
 render();
 
-
+//Create and add cubes to the scene.---------------------------
 function addCubes() {
   var xDistance = 30;
   var zDistance = 15;
@@ -71,7 +71,7 @@ function addCubes() {
     }
   }
 
-}
+}//-------------------------------------------------
 
 
 
@@ -139,23 +139,19 @@ function onDocumentMouseDown( event )
   var ray = new THREE.Raycaster();
   ray.setFromCamera( mouse, camera );
 
-  console.log("------------------------------------------");
+  intersects = ray.intersectObjects( scene.children );
+  if ( intersects.length > 0 && INTERSECTED != intersects[0].object)
+  {
+    INTERSECTED = intersects[0].object;
+    INTERSECTED.material.emissive.setHex( 0xff0000 );
+    console.log("The Intersected Node: " + INTERSECTED.name);
+  }
 
-  // create an array containing all objects in the scene with which the ray intersects
+
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       for (let k = 0; k < 4; k++) {
-        intersects = ray.intersectObjects( scene.children );
-
         targetList[i][j][k].name = i +" "+j+" "+k;
-        if ( intersects.length > 0 && INTERSECTED != intersects[0].object)
-        {
-          INTERSECTED = intersects[0].object;
-          // INTERSECTED.id= targetList[i][j][k].name;
-          INTERSECTED.material.emissive.setHex( 0xff0000 );
-          // let val = document.getElementById(INTERSECTED.name);
-          console.log("The Intersected Node: " + INTERSECTED.name);
-        }
       } //------k for loop ends
 
       //Checks 2D Horizontal win on every plane.
@@ -196,8 +192,41 @@ function onDocumentMouseDown( event )
       && targetList[1][i][j].material.emissive.equals({r:1,g:0,b:0})
       && targetList[2][i][j].material.emissive.equals({r:1,g:0,b:0})
       && targetList[3][i][j].material.emissive.equals({r:1,g:0,b:0})){
-        alert('Red 3D win. Checks up and down');
+        alert('Red 3D win. Checks up and down between planes');
       }
+      //Checks 3D Diagonal win on every plane. Checks up and down
+      if(targetList[0][i][3].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][i][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][i][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][i][0].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D win. Checks up and down between planes');
+      }
+      //Checks 3D Diagonal win on every plane. Checks up and down
+      if(targetList[0][0][i].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][1][i].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][2][i].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][3][i].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D win. Checks up and down between planes');
+      }
+      //Checks 3D Diagonal win on every plane. Checks up and down
+      if(targetList[0][i][0].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][i][1].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][i][2].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][i][3].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D win. Checks up and down between planes');
+      }
+      //Checks 3D Diagonal win on every plane. Checks up and down
+      if(targetList[0][3][i].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[1][2][i].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[2][1][i].material.emissive.equals({r:1,g:0,b:0})
+      && targetList[3][0][i].material.emissive.equals({r:1,g:0,b:0})){
+        alert('Red 3D win. Checks up and down between planes');
+      }
+
+
+
+
+
 
       //Checks first set 3D Diagonal win.
       if(targetList[0][0][3].material.emissive.equals({r:1,g:0,b:0})
@@ -233,12 +262,6 @@ function onDocumentMouseDown( event )
   }
 
   console.log(targetList);
-
-
-
-
-
-
 
 }
 //CLICK Function Ended--------------//////////////////////////////////////
