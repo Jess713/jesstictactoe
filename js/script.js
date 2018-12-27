@@ -169,15 +169,17 @@ var flag = false;
       //   console.log(bestSpot());
       //   turn(bestSpot(), aiPlayer);
       // }
-
+      if(flag && count != 64){
+        turn(INTERSECTED, aiPlayer);
+        INTERSECTED = null;
+      }else if( !flag && count != 64){
+        turn(INTERSECTED, huPlayer);
+        INTERSECTED = null;
+      }
 
     }
 
-    if(flag && count != 64){
-      turn(INTERSECTED, aiPlayer);
-    }else if( !flag && count != 64){
-      turn(INTERSECTED, huPlayer);
-    }
+
 
     if (winning(targetList, huPlayer)){
       alert ('Red win');
@@ -190,15 +192,16 @@ var flag = false;
 
 
   }
-  //CLICK Function Ended--------------//////////////////////////////////////
+  //CLICK Function Ended--------------/////////////////////////////////////
+
   function turn (point, player){
     if (point === undefined){
       console.log('Not here');
-    } else if (player === huPlayer) {
+    } else if (player === huPlayer && point.material.emissive.equals(tie)) {
       point.material.emissive.setHex( 0xff0000 );
       flag = true;
       count++;
-    } else if (player === aiPlayer) {
+    } else if (player === aiPlayer && point.material.emissive.equals(tie)) {
 
       point.material.emissive.setHex( 0x0000ff );
       flag = false;
