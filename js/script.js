@@ -159,21 +159,15 @@ var flag = false;
     {
 
       INTERSECTED = intersects[0].object;
-      // turn(INTERSECTED, huPlayer);
-
       console.log("The Intersected Node: " + INTERSECTED.name);
 
-
-
-      // if ( !winning(targetList, huPlayer) ){
-      //   console.log(bestSpot());
-      //   turn(bestSpot(), aiPlayer);
-      // }
       if(flag && count != 64){
         turn(INTERSECTED, aiPlayer);
+        console.log(count);
         INTERSECTED = null;
       }else if( !flag && count != 64){
         turn(INTERSECTED, huPlayer);
+        console.log(count);
         INTERSECTED = null;
       }
 
@@ -182,11 +176,14 @@ var flag = false;
 
 
     if (winning(targetList, huPlayer)){
-      alert ('Red win');
+      if(alert('Red Win')){}
+      else    window.location.reload();
     }else if (winning(targetList, aiPlayer)){
-      alert ('Blue win');
+      if(alert('Blue Win')){}
+      else    window.location.reload();
     }else if (count == 64){
-      alert ('Tie game');
+      if(alert('Tie game')){}
+      else    window.location.reload();
     }
 
 
