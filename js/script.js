@@ -97,7 +97,11 @@ var flag = false;
 
 
     // Add controls
-    controls = new THREE.TrackballControls( camera );
+    // controls = new THREE.TrackballControls( camera );
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+    controls.enablePan = true;
+    controls.enableDamping = false;
     controls.addEventListener( 'change', render );
     controls.target.set(50,0,-50);
 
