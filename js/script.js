@@ -146,11 +146,13 @@ for (let i = 0; i < 4; i++) {
 document.body.appendChild(renderer.domElement);
 document.addEventListener('touchend', onDocumentTouchEnd, false);
 
+
 function onDocumentTouchEnd(event) {
   event.preventDefault();
 
-  mouse.x = (event.changedTouches[0].clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
+  mouse.x = +(event.targetTouches[0].pageX / window.innerwidth) * 2 +-1;
+
+  mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
   intersects = raycaster.intersectObjects(scene.children);
