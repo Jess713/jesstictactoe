@@ -132,6 +132,7 @@ function init() {
 projector = new THREE.Projector();
 // when the mouse moves, call the given function
 document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+document.addEventListener('touchend', onDocumentMouseDown, false);
 
 for (let i = 0; i < 4; i++) {
   for (let j = 0; j < 4; j++) {
@@ -144,62 +145,20 @@ for (let i = 0; i < 4; i++) {
 //HERE IS THE CLICK FUNCTION---------------------------------------------
 
 document.body.appendChild(renderer.domElement);
-document.addEventListener('touchend', onDocumentTouchEnd, false);
 
 
-function onDocumentTouchEnd(event) {
-  event.preventDefault();
-
-  mouse.x = +(event.targetTouches[0].pageX / window.innerwidth) * 2 +-1;
-
-  mouse.y = -(event.targetTouches[0].pageY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(mouse, camera);
-  intersects = raycaster.intersectObjects(scene.children);
-
-  if (intersects.length > 0 && INTERSECTED != intersects[0].object)
-  {
-
-    INTERSECTED = intersects[0].object;
-    console.log("The Intersected Node: " + INTERSECTED.name);
-
-    if(flag && count != 64){
-      turn(INTERSECTED, aiPlayer);
-      console.log(count);
-      INTERSECTED = null;
-    }else if( !flag && count != 64){
-      turn(INTERSECTED, huPlayer);
-      console.log(count);
-      INTERSECTED = null;
-    }
-
-  }
-
-
-
-  if (winning(targetList, huPlayer)){
-    if(alert('Red Win')){}
-    else    window.location.reload();
-  }else if (winning(targetList, aiPlayer)){
-    if(alert('Blue Win')){}
-    else    window.location.reload();
-  }else if (count == 64){
-    if(alert('Tie game')){}
-    else    window.location.reload();
-  }
-
-
-
-}
-
-function onDocumentMouseDown(  event)
+function onDocumentMouseDown(event)
 {
 
 
   // update the mouse variable
-  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
+  if(event.type === 'mousedown'){
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+  }else if(event.type === 'touchend'){
+    mouse.x = (event.changedTouches[0].clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
+  }
   // find intersections
   // create a Ray with origin at the mouse position
   //   and direction into the scene (camera direction)
