@@ -153,7 +153,7 @@ function onDocumentTouchEnd(event) {
   mouse.y = -(event.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(scene.children);
+  intersects = raycaster.intersectObjects(scene.children);
 
   if (intersects.length > 0 && INTERSECTED != intersects[0].object)
   {
@@ -398,7 +398,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  controls.handleResize();
+  // controls.handleResize();
 }
 
 function winning(list, player){
